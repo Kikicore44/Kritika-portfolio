@@ -49,7 +49,7 @@ const HeroSection = () => {
               </div>
               <div className="px-4 pb-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-400" />
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "hsl(142, 71%, 45%)" }} />
                   <div>
                     <p className="text-xs font-medium text-foreground">@kritika</p>
                     <p className="text-[10px] text-muted-foreground">Online</p>
