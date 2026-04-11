@@ -30,7 +30,7 @@ const HeroIntro = () => {
     setTimeout(() => setIsSwinging(false), 1500);
   };
 
-  const textScale = 1 - scrollProgress * 0.5;
+  // No scaling — just move left
   const textX = -scrollProgress * 30;
   const textAlign = scrollProgress > 0.3 ? "left" : "center";
   const cardOpacity = Math.min(1, scrollProgress * 2);
@@ -40,7 +40,7 @@ const HeroIntro = () => {
   return (
     <section ref={sectionRef} className="relative min-h-[200vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Background - black to deep navy */}
+        {/* Background - black fading to blue */}
         <div className="absolute inset-0 bg-[#020810]" />
         <div
           className="absolute inset-0 transition-opacity duration-[3000ms]"
@@ -93,11 +93,11 @@ const HeroIntro = () => {
           </div>
         </div>
 
-        {/* Main text - huge bold condensed like reference */}
+        {/* Main text — no scale, just translate left */}
         <div
           className="relative z-10 px-6 w-full max-w-7xl mx-auto transition-all duration-300"
           style={{
-            transform: `scale(${textScale}) translateX(${textX}%)`,
+            transform: `translateX(${textX}%)`,
             textAlign: textAlign as any,
           }}
         >
@@ -118,18 +118,21 @@ const HeroIntro = () => {
           >
             KRITIKA<br />GURUNG
           </h1>
-          <p
-            className="text-xl md:text-3xl lg:text-4xl text-foreground/70 animate-fade-in transition-opacity duration-300"
-            style={{
-              animationDelay: "1.5s",
-              opacity: Math.max(0, welcomeOpacity),
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 400,
-              letterSpacing: '0.01em',
-            }}
-          >
-            Welcome to my portfolio website
-          </p>
+          {/* Welcome text only visible before scrolling — hidden in ID card state */}
+          {scrollProgress < 0.15 && (
+            <p
+              className="text-xl md:text-3xl lg:text-4xl text-foreground/70 animate-fade-in transition-opacity duration-300"
+              style={{
+                animationDelay: "1.5s",
+                opacity: Math.max(0, welcomeOpacity),
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                letterSpacing: '0.01em',
+              }}
+            >
+              Welcome to my portfolio website
+            </p>
+          )}
           
           {scrollProgress > 0.2 && (
             <div className="typing-animation text-xl md:text-3xl font-heading text-primary mb-4 mt-4">

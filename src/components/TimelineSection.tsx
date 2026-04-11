@@ -30,7 +30,6 @@ const timeline = [
 
 const TimelineEntry = ({ entry, index, isActive }: { entry: typeof timeline[0]; index: number; isActive: boolean }) => {
   const [visibleItems, setVisibleItems] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isActive) { setVisibleItems(0); return; }
@@ -45,11 +44,10 @@ const TimelineEntry = ({ entry, index, isActive }: { entry: typeof timeline[0]; 
 
   return (
     <div
-      ref={ref}
       className={`flex gap-8 md:gap-16 transition-all duration-700 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
     >
       <div className="flex flex-col items-center relative">
-        <div className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${isActive ? 'bg-primary border-primary glow-blue scale-125' : 'bg-card border-border'}`} />
+        <div className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${isActive ? 'bg-primary border-primary glow-blue scale-125' : 'bg-black/40 border-border'}`} />
         <div className="w-0.5 flex-1 bg-gradient-to-b from-primary/50 to-transparent" />
       </div>
       <div className="pb-16 flex-1">
@@ -63,7 +61,7 @@ const TimelineEntry = ({ entry, index, isActive }: { entry: typeof timeline[0]; 
           {entry.items.map((item, i) => (
             <div
               key={i}
-              className={`bg-card border border-border rounded-xl p-4 hover:border-primary/30 transition-all duration-500 ${visibleItems >= i + 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+              className={`bg-black/40 backdrop-blur-sm border border-border/30 rounded-xl p-4 hover:border-primary/30 transition-all duration-500 ${visibleItems >= i + 3 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
             >
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-primary" />
@@ -99,7 +97,9 @@ const TimelineSection = () => {
 
   return (
     <section className="px-6 py-20">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto rounded-2xl bg-black/40 backdrop-blur-sm border border-border/30 p-8 md:p-12">
+        <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">EXPERIENCE</h2>
+        <div className="w-12 h-1 bg-primary mx-auto mb-16 rounded-full" />
         {timeline.map((entry, i) => (
           <div key={i} ref={(el) => { refs.current[i] = el; }}>
             <TimelineEntry entry={entry} index={i} isActive={i <= activeIndex} />
