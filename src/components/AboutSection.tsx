@@ -26,7 +26,7 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" ref={ref} className="min-h-[150vh] flex flex-col items-center justify-center px-6 py-32">
+    <section id="about" ref={ref} className="min-h-[150vh] flex flex-col items-center justify-center px-6 py-16">
       <h2 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-4">ABOUT ME</h2>
       <div className="w-12 h-1 bg-primary mx-auto mb-16 rounded-full" />
       <p className="text-xl md:text-3xl lg:text-4xl font-heading font-bold leading-relaxed max-w-4xl text-center">
