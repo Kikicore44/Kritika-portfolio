@@ -40,53 +40,45 @@ const HeroIntro = () => {
   return (
     <section ref={sectionRef} className="relative min-h-[200vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Background - black to blue glow transition */}
-        <div className="absolute inset-0 bg-background" />
+        {/* Background - black to deep navy */}
+        <div className="absolute inset-0 bg-[#020810]" />
         <div
           className="absolute inset-0 transition-opacity duration-[3000ms]"
           style={{ opacity: bgOpacity }}
         >
-          {/* Blue glow effect like reference */}
-          <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-primary/30 rounded-full blur-[150px]" />
-          <div className="absolute top-10 left-1/3 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]" />
-          <div className="absolute top-0 right-1/3 w-[300px] h-[300px] bg-primary/15 rounded-full blur-[100px]" />
+          <div className="absolute inset-0" style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 40%, #0a2a5c 0%, #061535 40%, #020810 80%)'
+          }} />
+          <div className="absolute inset-0" style={{
+            background: 'radial-gradient(ellipse 60% 50% at 30% 30%, #0d3470 0%, transparent 60%)'
+          }} />
+          <div className="absolute inset-0" style={{
+            background: 'radial-gradient(ellipse 50% 40% at 70% 60%, #08204a 0%, transparent 60%)'
+          }} />
         </div>
 
-        {/* ID Card Lanyard - hung from top right */}
+        {/* ID Card Lanyard */}
         <div
           className="absolute right-8 md:right-20 lg:right-32 top-0 z-20 flex flex-col items-center transition-all duration-500"
           style={{ opacity: cardOpacity, transform: `translateX(${cardX}px)` }}
         >
-          {/* Lanyard string */}
           <div className="w-0.5 bg-gradient-to-b from-foreground/60 to-foreground/20" style={{ height: '90px' }} />
-          {/* Clip */}
           <div className="w-6 h-4 rounded-b-sm bg-muted-foreground/40 border border-border/50 flex items-center justify-center">
             <div className="w-3 h-1.5 rounded-sm bg-muted-foreground/60" />
           </div>
-          
-          {/* ID Card */}
           <div
             onClick={handleCardClick}
             className={`cursor-pointer mt-1 ${isSwinging ? 'animate-swing-click' : 'animate-swing'}`}
             style={{ transformOrigin: 'top center' }}
           >
             <div className="relative w-48 md:w-56 rounded-xl bg-card border border-border overflow-hidden glow-blue shadow-2xl">
-              {/* Card header */}
               <div className="bg-gradient-to-b from-primary/30 to-primary/10 p-3 text-center border-b border-border/30">
                 <h3 className="font-heading font-bold text-sm text-foreground">Kritika Gurung</h3>
                 <p className="text-[10px] text-muted-foreground">Aspiring Web Developer</p>
               </div>
-              {/* Photo */}
               <div className="p-3">
-                <img
-                  src={profilePhoto}
-                  alt="Kritika Gurung"
-                  className="w-full aspect-[3/4] object-cover rounded-lg"
-                  width={512}
-                  height={682}
-                />
+                <img src={profilePhoto} alt="Kritika Gurung" className="w-full aspect-[3/4] object-cover rounded-lg" width={512} height={682} />
               </div>
-              {/* Footer */}
               <div className="px-3 pb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
@@ -95,15 +87,13 @@ const HeroIntro = () => {
                     <p className="text-[8px] text-muted-foreground">Online</p>
                   </div>
                 </div>
-                <span className="text-[9px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">
-                  Contact Me
-                </span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">Contact Me</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main text */}
+        {/* Main text - huge bold condensed like reference */}
         <div
           className="relative z-10 px-6 w-full max-w-7xl mx-auto transition-all duration-300"
           style={{
@@ -112,23 +102,33 @@ const HeroIntro = () => {
           }}
         >
           <p
-            className="text-xl md:text-2xl text-muted-foreground mb-2 animate-fade-in italic"
-            style={{ animationDelay: "0.5s" }}
+            className="text-2xl md:text-3xl lg:text-4xl text-muted-foreground mb-4 animate-fade-in"
+            style={{ animationDelay: "0.5s", fontFamily: "'Outfit', sans-serif", fontWeight: 500, letterSpacing: '0.02em' }}
           >
             Hello, I'm
           </p>
           <h1
-            className="text-6xl md:text-8xl lg:text-[10rem] font-heading font-extrabold text-foreground mb-4 animate-fade-in leading-[0.9] tracking-tight"
-            style={{ animationDelay: "1s" }}
+            className="font-extrabold text-foreground mb-6 animate-fade-in leading-[0.95] uppercase"
+            style={{
+              animationDelay: "1s",
+              fontFamily: "'Bebas Neue', 'Syne', sans-serif",
+              fontSize: 'clamp(5rem, 15vw, 14rem)',
+              letterSpacing: '0.04em',
+            }}
           >
             KRITIKA<br />GURUNG
           </h1>
-          {/* Welcome text - fades out on scroll */}
           <p
-            className="text-lg md:text-2xl text-foreground/70 font-heading animate-fade-in transition-opacity duration-300"
-            style={{ animationDelay: "1.5s", opacity: Math.max(0, welcomeOpacity) }}
+            className="text-xl md:text-3xl lg:text-4xl text-foreground/70 animate-fade-in transition-opacity duration-300"
+            style={{
+              animationDelay: "1.5s",
+              opacity: Math.max(0, welcomeOpacity),
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 400,
+              letterSpacing: '0.01em',
+            }}
           >
-            Welcome to my Portfolio Website
+            Welcome to my portfolio website
           </p>
           
           {scrollProgress > 0.2 && (
