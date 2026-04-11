@@ -32,11 +32,10 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       }}
     >
       <div
-        className={`bg-gradient-to-br ${project.color} bg-card border border-border rounded-2xl p-8 md:p-12 max-w-4xl mx-auto relative overflow-hidden cursor-pointer transition-all duration-300 ${isHovered ? 'scale-[1.02] shadow-2xl' : ''}`}
+        className={`bg-gradient-to-br ${project.color} bg-black/40 backdrop-blur-sm border border-border/30 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto relative overflow-hidden cursor-pointer transition-all duration-300 ${isHovered ? 'scale-[1.02] shadow-2xl' : ''}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Project visual placeholder */}
         <div className="w-full h-40 md:h-56 rounded-xl bg-background/30 border border-border/50 mb-6 flex items-center justify-center overflow-hidden">
           <div className="text-6xl opacity-30">🖥️</div>
         </div>
@@ -49,7 +48,6 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
           <span className="text-xs px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">{project.tech}</span>
         </div>
 
-        {/* Description shown on hover */}
         <div
           className={`transition-all duration-500 overflow-hidden ${isHovered ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
         >
@@ -61,9 +59,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 };
 
 const ProjectsSection = () => (
-  <section className="px-6 pt-20 pb-8">
-    <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">MY PROJECTS</h2>
-    <div className="w-12 h-1 bg-primary mx-auto mb-20 rounded-full" />
+  <section className="px-6 pt-12 pb-8">
+    <div className="max-w-4xl mx-auto rounded-2xl bg-black/40 backdrop-blur-sm border border-border/30 p-8 md:p-12 mb-8">
+      <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">MY PROJECTS</h2>
+      <div className="w-12 h-1 bg-primary mx-auto rounded-full" />
+    </div>
     <div className="space-y-8 max-w-4xl mx-auto pb-[60vh]">
       {projects.map((project, i) => (
         <ProjectCard key={i} project={project} index={i} />
