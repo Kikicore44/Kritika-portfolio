@@ -60,7 +60,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 
 const ProjectsSection = () => (
   <section className="px-6 pt-12 pb-8">
-    <div className="max-w-4xl mx-auto rounded-2xl bg-black/40 backdrop-blur-sm border border-border/30 p-8 md:p-12 mb-8">
+    <div className="max-w-4xl mx-auto px-2 md:px-0 mb-8">
       <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">MY PROJECTS</h2>
       <div className="w-12 h-1 bg-primary mx-auto rounded-full" />
     </div>

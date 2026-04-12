@@ -141,6 +141,36 @@
     animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
     width: fit-content;
   }
+
+  .typing-animation-roles {
+    animation: typing 3s steps(42, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Continuously rotating role text */
+  @keyframes role-slide {
+    0%        { transform: translateY(0%);    opacity: 1; }
+    20%       { transform: translateY(0%);    opacity: 1; }
+    30%       { transform: translateY(-100%); opacity: 0; }
+    33%       { transform: translateY(100%);  opacity: 0; }
+    43%       { transform: translateY(0%);    opacity: 1; }
+    63%       { transform: translateY(0%);    opacity: 1; }
+    73%       { transform: translateY(-100%); opacity: 0; }
+    76%       { transform: translateY(100%);  opacity: 0; }
+    86%       { transform: translateY(0%);    opacity: 1; }
+    100%      { transform: translateY(0%);    opacity: 1; }
+  }
+
+  .role-cycle {
+    overflow: hidden;
+    height: 1.2em;
+    position: relative;
+  }
+
+  .role-cycle span {
+    display: inline-block;
+    animation: role-slide 6s ease-in-out infinite;
+    white-space: nowrap;
+  }
 }
 
 ::-webkit-scrollbar {

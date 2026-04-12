@@ -97,7 +97,7 @@ const TimelineSection = () => {
 
   return (
     <section className="px-6 py-20">
-      <div className="max-w-3xl mx-auto rounded-2xl bg-black/40 backdrop-blur-sm border border-border/30 p-8 md:p-12">
+      <div className="max-w-3xl mx-auto p-8 md:p-12">
         <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">EXPERIENCE</h2>
         <div className="w-12 h-1 bg-primary mx-auto mb-16 rounded-full" />
         {timeline.map((entry, i) => (

@@ -45,7 +45,7 @@ const ToolCard = ({ tool, index }: { tool: typeof tools[0]; index: number }) => 
 
 const ToolsStack = () => (
   <section className="px-6 py-20">
-    <div className="max-w-5xl mx-auto rounded-2xl bg-black/40 backdrop-blur-sm border border-border/30 p-8 md:p-12">
+    <div className="max-w-5xl mx-auto p-8 md:p-12">
       <h2 className="text-4xl md:text-6xl font-heading font-bold text-center text-foreground mb-4">TOOLS & STACK</h2>
       <div className="w-12 h-1 bg-primary mx-auto mb-16 rounded-full" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
