@@ -3,27 +3,33 @@ import { useEffect, useRef, useState } from "react";
 const timeline = [
   {
     year: "2026",
-    desc: "Pushing boundaries with modern frontend frameworks and creative web experiences.",
+    desc: "Building advanced real-world applications with modern frameworks, AI integration, and fast-paced innovation through hackathons and projects",
     items: [
-      { title: "Interactive Portfolio", tag: "React", tagColor: "bg-blue-500/20 text-blue-400" },
-      { title: "Design System Library", tag: "TypeScript", tagColor: "bg-cyan-500/20 text-cyan-400" },
+      { title: "InnoHack 2026 — Developed a Trekking Safety App under time constraints in a team, focusing on real-time decision-making and safety for trekkers.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
+      { title: "Period Tracking App — Built a React-based application with AI integration to improve user interaction and personalized insights.", tag: "React/AI", tagColor: "bg-blue-500/20 text-blue-400" },
+      { title: "Portfolio Website — Designed and developed my first modern portfolio using Tailwind CSS to showcase projects and skills.", tag: "Tailwind CSS", tagColor: "bg-cyan-500/20 text-cyan-400" },
     ],
   },
   {
     year: "2025",
-    desc: "Leveling up with full-stack development and production-ready web applications.",
+    desc: "Strengthening core development skills through internships, full-stack projects, hackathons, and collaborative real-world learning experiences.",
     items: [
-      { title: "E-Commerce Platform", tag: "React", tagColor: "bg-blue-500/20 text-blue-400" },
-      { title: "Weather App", tag: "JavaScript", tagColor: "bg-yellow-500/20 text-yellow-400" },
-      { title: "Task Manager", tag: "TypeScript", tagColor: "bg-cyan-500/20 text-cyan-400" },
+      { title: "Junior Developer Intern (PathSutra, Ongoing) — Started working on real-world web development tasks and improving frontend/backend understanding.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
+      { title: "Nobel Learning PBC(4 months) — Gained experience in different fields, global collaboration, and pitching ideas.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
+      { title: "Gym Management System — Built a desktop-based system to manage gym operations using Java.", tag: "Java", tagColor: "bg-yellow-700/20 text-yellow-600" },
+      { title: "WeCare Skincare System — Developed a terminal-based e-commerce system for skincare product management.", tag: "Python", tagColor: "bg-blue-700/20 text-blue-600" },
+      { title: "UI/UX Design — Started designing prototype websites such as e-commerce and hotel booking systems.", tag: "Figma", tagColor: "bg-pink-500/20 text-pink-400" },
+      { title: "ICP Experience & ICP Elevate 2025 — Improved teamwork, leadership, and communication skills.", tag: "Volunteer", tagColor: "bg-indigo-500/20 text-indigo-400" },
+      { title: "UNESCO Youth Hackathon 2025 — Participated in an international hackathon and worked in a team under pressure for the first time.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
     ],
   },
   {
     year: "2024",
-    desc: "Started learning web development fundamentals and building first projects.",
+    desc: "Exploring the fundamentals of programming, web development, and design while building first projects and gaining technical confidence.",
     items: [
-      { title: "First Portfolio", tag: "HTML/CSS", tagColor: "bg-orange-500/20 text-orange-400" },
-      { title: "Landing Pages", tag: "HTML/CSS", tagColor: "bg-orange-500/20 text-orange-400" },
+      { title: "First Website — Built a smartwatch e-commerce website with a team as my first web development project.", tag: "HTML/CSS/JavaScript", tagColor: "bg-orange-500/20 text-orange-400" },
+      { title: "Logo Design — Started creating branding designs for TikTok pages and presentations.", tag: "Canva", tagColor: "bg-blue-400/20 text-blue-400" },
+      { title: "ING Skill Academy — Developed communication and leadership skills through volunteering activities.", tag: "Volunteer", tagColor: "bg-indigo-500/20 text-indigo-400" },
     ],
   },
 ];
@@ -65,9 +71,16 @@ const TimelineEntry = ({ entry, index, isActive }: { entry: typeof timeline[0]; 
             >
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span className="font-heading font-bold text-foreground text-sm">{item.title}</span>
+                <span className="font-heading font-bold text-foreground text-sm">
+                  {item.title.split('—')[0].trim()}
+                </span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full ${item.tagColor}`}>{item.tag}</span>
               </div>
+              {item.title.includes('—') && (
+                <div className="text-xs text-muted-foreground mt-1 ml-6">
+                  {item.title.split('—').slice(1).join('—').trim()}
+                </div>
+              )}
             </div>
           ))}
         </div>

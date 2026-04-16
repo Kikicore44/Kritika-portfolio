@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import { toolLogos } from "./toolLogos";
 
 const tools = [
-  { name: "HTML", desc: "Standard Markup Language", icon: "🌐" },
-  { name: "CSS", desc: "Style Sheet Language", icon: "🎨" },
-  { name: "JavaScript", desc: "Web Scripting Language", icon: "⚡" },
-  { name: "TypeScript", desc: "Typed JavaScript", icon: "📘" },
-  { name: "React", desc: "Frontend UI Library", icon: "⚛️" },
-  { name: "Node.js", desc: "JS Runtime Environment", icon: "🟢" },
-  { name: "Vite", desc: "Next Generation Bundler", icon: "🔥" },
-  { name: "Tailwind CSS", desc: "Utility-First CSS", icon: "💨" },
-  { name: "GitHub", desc: "Version Control Platform", icon: "🐙" },
-  { name: "Figma", desc: "Design Tool", icon: "🎯" },
-  { name: "Next.js", desc: "React Framework", icon: "▲" },
-  { name: "Framer Motion", desc: "Animation Library", icon: "✨" },
+  { name: "HTML", desc: "Standard Markup Language" },
+  { name: "CSS", desc: "Cascading Style Sheets" },
+  { name: "JavaScript", desc: "Dynamic Web Scripting" },
+  { name: "Python", desc: "Versatile Programming Language" },
+  { name: "React", desc: "Component-based UI Library" },
+  { name: "Node.js", desc: "Server-side JS Runtime" },
+  { name: "MySql", desc: "Relational Database System" },
+  { name: "Figma", desc: "Collaborative UI/UX Design Tool" },
+  { name: "Canva", desc: "Online Graphic Design Platform" },
 ];
 
 const ToolCard = ({ tool, index }: { tool: typeof tools[0]; index: number }) => {
@@ -34,7 +32,12 @@ const ToolCard = ({ tool, index }: { tool: typeof tools[0]; index: number }) => 
       className={`flex items-center gap-4 p-4 rounded-xl bg-black/40 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       style={{ transitionDelay: `${index * 80}ms` }}
     >
-      <span className="text-2xl">{tool.icon}</span>
+      <img
+        src={toolLogos[tool.name]}
+        alt={tool.name + " logo"}
+        className="w-12 h-12 object-contain rounded"
+        style={{ minWidth: 48, minHeight: 48 }}
+      />
       <div>
         <p className="font-heading font-bold text-foreground text-sm">{tool.name}</p>
         <p className="text-xs text-muted-foreground">{tool.desc}</p>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const words = "As a passionate frontend developer, I build fully functional websites with advanced effects and modern designs, focusing on creativity, usability, and a smooth user experience. I love transforming ideas into beautiful, interactive digital experiences.".split(" ");
+const words = "As a passionate Frontend Developer, I enjoy creating modern and visually engaging web experiences that feel smooth, interactive, and meaningful. I focus on clean design and intuitive user interaction, always trying to make things simple yet impactful. For me, every project is an opportunity to turn ideas into creative digital experiences that people can connect with. I’m constantly exploring new ways to improve and bring more creativity into my work.".split(" ");
 
 const AboutSection = () => {
   const [activeWordIndex, setActiveWordIndex] = useState(-1);
