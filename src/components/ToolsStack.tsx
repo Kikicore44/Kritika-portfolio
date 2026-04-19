@@ -18,6 +18,11 @@ const ToolCard = ({ tool, index }: { tool: typeof tools[0]; index: number }) => 
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
       { threshold: 0.2 }

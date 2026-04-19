@@ -35,6 +35,10 @@ const HeroIntro = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const sectionHeight = sectionRef.current.offsetHeight;
+      if (!sectionHeight) {
+        setScrollProgress(0);
+        return;
+      }
       const progress = Math.max(0, Math.min(1, -rect.top / (sectionHeight * 0.5)));
       setScrollProgress(progress);
     };
@@ -48,8 +52,14 @@ const HeroIntro = () => {
     const mq = window.matchMedia("(min-width: 1024px)");
     const update = () => setIsDesktop(mq.matches);
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", update);
+      return () => mq.removeEventListener("change", update);
+    }
+
+    mq.addListener(update);
+    return () => mq.removeListener(update);
   }, []);
 
   const showHeroRoles = scrollProgress > 0.2;

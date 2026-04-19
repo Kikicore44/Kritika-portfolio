@@ -1,8 +1,9 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import type React from "react";
 import { Canvas, extend, useFrame, useThree, type Object3DNode } from "@react-three/fiber";
 import kImg from "../assets/k.jpg";
-import { Environment, Lightformer, PerspectiveCamera, useGLTF, useTexture, Html } from "@react-three/drei";
+import { Environment, Lightformer, PerspectiveCamera, useGLTF, useTexture } from "@react-three/drei";
 import {
   BallCollider,
   CuboidCollider,
@@ -36,6 +37,25 @@ type IdCard3DProps = {
 };
 
 export default function IdCard3D({ className, style }: IdCard3DProps) {
+  const [rapierReady, setRapierReady] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    import("@dimforge/rapier3d-compat")
+      .then((rapier) => rapier.init())
+      .then(() => {
+        if (mounted) setRapierReady(true);
+      })
+      .catch((error) => {
+        console.error("Failed to initialize Rapier:", error);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className={className} style={{ touchAction: "none", ...style }}>
       <Canvas
@@ -47,9 +67,11 @@ export default function IdCard3D({ className, style }: IdCard3DProps) {
         <Suspense fallback={null}>
           <PerspectiveCamera makeDefault position={[0.45, 0.35, 13.6]} fov={32} near={0.1} far={200} />
           <ambientLight intensity={Math.PI} />
-          <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
-            <Band />
-          </Physics>
+          {rapierReady && (
+            <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
+              <Band />
+            </Physics>
+          )}
           <Environment background={false} blur={0.75}>
             <Lightformer
               intensity={2}
@@ -93,7 +115,6 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
   const j2 = useRef<RapierRigidBody>(null);
   const j3 = useRef<RapierRigidBody>(null);
   const card = useRef<RapierRigidBody>(null);
-  const cardMeshRef = useRef<THREE.Mesh>(null);
 
   const vec = new THREE.Vector3();
   const ang = new THREE.Vector3();
@@ -114,6 +135,9 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
     materials: Record<string, THREE.MeshStandardMaterial & { map?: THREE.Texture }>;
   };
   const texture = useTexture(TEXTURE_PATH);
+  const photoTexture = useTexture(kImg);
+  const textCanvas = useRef<HTMLCanvasElement | null>(null);
+  const textTexture = useRef<THREE.CanvasTexture | null>(null);
   const { width, height } = useThree((state) => state.size);
   const [curve] = useState(
     () =>
@@ -126,7 +150,6 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
   );
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
-  const [isOccluded, setOccluded] = useState(false);
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
@@ -215,6 +238,41 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
 
   curve.curveType = "chordal";
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  photoTexture.colorSpace = THREE.SRGBColorSpace;
+
+  if (!textCanvas.current) {
+    textCanvas.current = document.createElement("canvas");
+    textCanvas.current.width = 1024;
+    textCanvas.current.height = 512;
+  }
+
+  if (!textTexture.current) {
+    textTexture.current = new THREE.CanvasTexture(textCanvas.current);
+    textTexture.current.colorSpace = THREE.SRGBColorSpace;
+    textTexture.current.needsUpdate = true;
+  }
+
+  useEffect(() => {
+    const canvas = textCanvas.current;
+    const texture = textTexture.current;
+    if (!canvas || !texture) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#18233d";
+    ctx.font = "900 88px 'Bebas Neue', sans-serif";
+    ctx.fillText("KRITIKA GURUNG", canvas.width / 2, 180);
+
+    ctx.fillStyle = "#2e384a";
+    ctx.font = "700 40px 'Outfit', sans-serif";
+    ctx.fillText("BSC (HONS) COMPUTING", canvas.width / 2, 265);
+
+    texture.needsUpdate = true;
+  }, []);
 
   const cardMesh = nodes.card;
 
@@ -258,7 +316,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current!.translation())));
             }}
           >
-            <mesh geometry={cardMesh.geometry} ref={cardMeshRef}>
+            <mesh geometry={cardMesh.geometry}>
               <meshPhysicalMaterial
                 color="#f8f9fa"
                 clearcoat={1}
@@ -266,37 +324,23 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
                 roughness={0.3}
                 metalness={0.5}
               />
-              <Html
-                transform
-                occlude={[cardMeshRef]}
-                onOcclude={setOccluded}
-                position={[-0.03, 0.43, 0.015]}
-                rotation={[0, 0, 0]}
-                scale={0.1}
-                className="pointer-events-none select-none"
-              >
-                <div
-                  className="flex flex-col items-center justify-center w-[300px]"
-                  style={{ transition: "opacity 0.15s ease", opacity: isOccluded ? 0 : 1 }}
-                >
-                  <div className="w-[195px] h-[195px] rounded-full overflow-hidden mb-5 border-[5px] border-primary shadow-xl">
-                    <img src={kImg} className="w-full h-full object-cover" alt="Kritika Gurung" />
-                  </div>
-                  <h2
-                    className="text-[36px] font-extrabold text-slate-900 text-center leading-[1.0] mb-3"
-                    style={{
-                      fontFamily: "'Bebas Neue', 'Syne', sans-serif",
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    KRITIKA GURUNG
-                  </h2>
-                  <p className="text-[20px] font-bold text-slate-700 tracking-wider text-center uppercase">
-                    BSc (Hons) Computing
-                  </p>
-                </div>
-              </Html>
             </mesh>
+
+            <mesh position={[0, 0.56, 0.022]}>
+              <circleGeometry args={[0.255, 64]} />
+              <meshBasicMaterial color="#204788" toneMapped={false} />
+            </mesh>
+
+            <mesh position={[0, 0.56, 0.024]}>
+              <circleGeometry args={[0.24, 64]} />
+              <meshBasicMaterial map={photoTexture} toneMapped={false} />
+            </mesh>
+
+            <mesh position={[0, 0.10, 0.024]}>
+              <planeGeometry args={[1.45, 0.5]} />
+              <meshBasicMaterial map={textTexture.current!} transparent toneMapped={false} />
+            </mesh>
+
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>
