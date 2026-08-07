@@ -5,7 +5,7 @@ const timeline = [
     year: "2026",
     desc: "Building advanced real-world applications with modern frameworks, AI integration, and fast-paced innovation through hackathons and projects",
     items: [
-      { title: "QA Engineer Intern — Websoft Technology Nepal Pvt. Ltd. | Internship | Jul 2026 - Present | Srijana Chowk, On-site.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
+      { title: "QA Engineer Intern (Websoft Technology Nepal Pvt. Ltd.,Ongoing) — Gaining practical experience in real-world web application testing and developing a stronger understanding of software quality assurance.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
       { title: "Gandaki Province Hackathon 2026 Winner(Code For Change) — Developed Lumo, a digital mental wellness platform focused on promoting mental well-being through interactive and engaging features.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
       { title: "InnoHack 2026 — Developed a Trekking Safety App under time constraints in a team, focusing on real-time decision-making and safety for trekkers.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
       { title: "Period Tracking App — Built a React-based application with AI integration to improve user interaction and personalized insights.", tag: "React/AI", tagColor: "bg-blue-500/20 text-blue-400" },
