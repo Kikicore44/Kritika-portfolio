@@ -5,6 +5,8 @@ const timeline = [
     year: "2026",
     desc: "Building advanced real-world applications with modern frameworks, AI integration, and fast-paced innovation through hackathons and projects",
     items: [
+      { title: "QA Engineer Intern — Websoft Technology Nepal Pvt. Ltd. | Internship | Jul 2026 - Present | Srijana Chowk, On-site.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
+      { title: "Gandaki Province Hackathon 2026 Winner(Code For Change) — Developed Lumo, a digital mental wellness platform focused on promoting mental well-being through interactive and engaging features.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
       { title: "InnoHack 2026 — Developed a Trekking Safety App under time constraints in a team, focusing on real-time decision-making and safety for trekkers.", tag: "Hackathon", tagColor: "bg-purple-500/20 text-purple-400" },
       { title: "Period Tracking App — Built a React-based application with AI integration to improve user interaction and personalized insights.", tag: "React/AI", tagColor: "bg-blue-500/20 text-blue-400" },
       { title: "Portfolio Website — Designed and developed my first modern portfolio using Tailwind CSS to showcase projects and skills.", tag: "Tailwind CSS", tagColor: "bg-cyan-500/20 text-cyan-400" },
@@ -14,7 +16,7 @@ const timeline = [
     year: "2025",
     desc: "Strengthening core development skills through internships, full-stack projects, hackathons, and collaborative real-world learning experiences.",
     items: [
-      { title: "Junior Developer Intern (PathSutra, Ongoing) — Started working on real-world web development tasks and improving frontend/backend understanding.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
+      { title: "Junior Developer Intern (PathSutra,8 months) — Started working on real-world web development tasks and improving frontend/backend understanding.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
       { title: "Nobel Learning PBC(4 months) — Gained experience in different fields, global collaboration, and pitching ideas.", tag: "Internship", tagColor: "bg-green-500/20 text-green-400" },
       { title: "Gym Management System — Built a desktop-based system to manage gym operations using Java.", tag: "Java", tagColor: "bg-yellow-700/20 text-yellow-600" },
       { title: "WeCare Skincare System — Developed a terminal-based e-commerce system for skincare product management.", tag: "Python", tagColor: "bg-blue-700/20 text-blue-600" },
